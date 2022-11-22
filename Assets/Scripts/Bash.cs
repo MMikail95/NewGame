@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bash : MonoBehaviour
 {
     private Rigidbody rb;
     public bool isHit;
-    public GameManager manager;
-    public GameObject cube;
+    [SerializeField] List<GameObject> _cubes;
     void Start()
     {
         isHit = false;
         rb = GetComponent<Rigidbody>();
-        CubeSpawn();
+        Spawn();
     }
     void Update()
     {
@@ -21,10 +22,20 @@ public class Bash : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Platform")
+        int vurma = 0;
+
+        if (vurma ==0 & collision.gameObject.tag == ("Cubes"))
         {
+            vurma=1;
             Debug.Log("WE HIT AN OBSTACLE");
             isHit = true;
+            collision.gameObject.transform.localScale = new Vector3(2, 2, 2);
+            if (vurma >= 1)
+            {
+                isHit = true;
+                collision.gameObject.transform.localScale = new Vector3(1, 1, 1);
+            }
+
         }
 
         if (collision.gameObject.name == "Roof")
@@ -46,8 +57,16 @@ public class Bash : MonoBehaviour
         }
     }
 
-    private void CubeSpawn()
+    private void Spawn()
     {
-        Instantiate(cube, Vector3.zero, Quaternion.identity);
+
+        Instantiate(_cubes[Random.Range(0, 3)], new Vector3(0f, 1f, 0f), Quaternion.identity);
+
+        //Instantiate(cube, new Vector3(-2f, 1f, 0f), Quaternion.identity);
+
+        //Instantiate(cube, new Vector3(-4f, 1f, 0f), Quaternion.identity);
+
+
+        //cubeList.Add((GameObject)Instantiate(Bash.cubeList, new Vector3(0, 1f, 0f), Quaternion.identity));
     }
 }

@@ -771,8 +771,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHit: 0
-  manager: {fileID: 854194110}
-  cube: {fileID: 0}
+  _cubes:
+  - {fileID: 3133874607915213462, guid: cea51034c362c964fa3bf5fe9b0f7c26, type: 3}
+  - {fileID: 7529508806471758065, guid: 979b5a180959d2f4b85ebb1609e58d7b, type: 3}
+  - {fileID: 9062929050468607447, guid: ba416fb11f3cce4429025b10f5662303, type: 3}
 --- !u!54 &1810440525
 Rigidbody:
   m_ObjectHideFlags: 0

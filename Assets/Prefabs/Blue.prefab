@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7987274611329415151}
   - component: {fileID: 306249719430303948}
   - component: {fileID: 8075852166481032099}
+  - component: {fileID: -7722867039808616036}
   m_Layer: 0
   m_Name: Blue
   m_TagString: Cubes
@@ -97,3 +98,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7722867039808616036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133874607915213462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada273568e9812f4dbe202ecc5f9cd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bash: {fileID: 0}

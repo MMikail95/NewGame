@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Bash : MonoBehaviour
 {
-    private Cubes cubes;
+    private Cube cubes;
     private Rigidbody rb;
     public bool isHit;
     void Start()
@@ -21,7 +21,7 @@ public class Bash : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        cubes = collision.gameObject.GetComponent<Cubes>();
+        cubes = collision.gameObject.GetComponent<Cube>();
         if (collision.gameObject.CompareTag("Cubes"))
         {
             isHit = true;

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cubes : MonoBehaviour
+public class Cube : MonoBehaviour
 {
+    public Spawner spawner; 
     private Bash bash;
-    private Spawn spawn;
     public int hit = 0;
     private void Awake()
     {
@@ -14,7 +14,6 @@ public class Cubes : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         bash = collision.gameObject.GetComponent<Bash>();
-        spawn = collision.gameObject.GetComponent<Spawn>();
 
         if (collision.gameObject.name == "Bash")
         {
@@ -39,7 +38,9 @@ public class Cubes : MonoBehaviour
             {
                 Debug.Log(hit);
                 transform.localScale = new Vector3(4, 1, 4);
-                transform.position = new Vector3(0, 0.75f, 0);               
+                transform.position = new Vector3(0, 0.75f, 0);
+                spawner.Spawn(spawner.spawnPos.position);
+                
             }
 
         }

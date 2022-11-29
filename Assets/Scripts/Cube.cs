@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    public Spawner spawner; 
+    public Spawner spawner;
     private Bash bash;
     public int hit = 0;
-    private void Awake()
+    public float destroySpeed = 2.5f;
+    private bool moveTimer;
+    private float moveTimerCounter;
+    private float _move = 6f;
+    [SerializeField] private float moveTimerDuration;
+    private Vector3 moveEndPos;
+    private Vector3 moveStartPos;
+
+    private void Update()
     {
+        Movement();
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -39,20 +48,54 @@ public class Cube : MonoBehaviour
                 Debug.Log(hit);
                 transform.localScale = new Vector3(4, 1, 4);
                 transform.position = new Vector3(0, 0.75f, 0);
-                spawner.Spawn(spawner.spawnPos.position);
-                
             }
-
-        }
-
-        if (hit == 3)
-        {
-            Move();
+            if (hit > 3)
+            {
+                spawner.Spawn(spawner.spawnPos.position);
+                Move();
+            }
         }
     }
 
     public void Move()
     {
-        transform.position = new Vector3(4, 0.75f, 0);
+        Vector3 targetPos = transform.position + Vector3.right * _move;
+        transform.position = new Vector3(6, 0.75f, 0);
+        SetMove(targetPos);
+
+        if (transform.position == new Vector3(6, 0.75f, 0))
+        {
+            Debug.Log("Cubes");
+            if (bash.upSpeed >= 150)
+            {
+                destroySpeed = 1;
+                Destroy(gameObject, destroySpeed);
+            }
+
+            Destroy(gameObject, 2.5f);
+        }
+    }
+
+    private void Movement()
+    {
+        if (moveTimerCounter < moveTimerDuration)
+        {
+            moveTimerCounter += Time.deltaTime;
+            spawner.transform.position = Vector3.Lerp(moveStartPos, moveEndPos, moveTimerCounter / moveTimerDuration);
+        }
+
+        else
+        {
+            moveTimer = false;
+            moveTimerCounter = 0;
+            spawner.transform.position = moveEndPos;
+        }
+    }
+
+    private void SetMove(Vector3 endPos)
+    {
+        moveStartPos = transform.position;
+        moveEndPos = endPos;
+        moveTimer = true;
     }
 }

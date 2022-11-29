@@ -110,3 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada273568e9812f4dbe202ecc5f9cd19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawner: {fileID: 0}
+  hit: 0
+  destroySpeed: 2.5
+  moveTimerDuration: 0

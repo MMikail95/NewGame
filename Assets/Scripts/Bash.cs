@@ -9,6 +9,8 @@ public class Bash : MonoBehaviour
     private Cube cubes;
     private Rigidbody rb;
     public bool isHit;
+    public int upSpeed = 25;
+    public int downSpeed = 75;
     void Start()
     {
         isHit = false;
@@ -22,6 +24,7 @@ public class Bash : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         cubes = collision.gameObject.GetComponent<Cube>();
+
         if (collision.gameObject.CompareTag("Cubes"))
         {
             isHit = true;
@@ -30,24 +33,36 @@ public class Bash : MonoBehaviour
         if (collision.gameObject.name == "Roof")
         {
             isHit = false;
-            //Debug.Log(cubes.hit);
         }
-        //if (cubes.hit == 3 & collision.gameObject.name == ("Roof"))
-        //{
-        //    Debug.Log(cubes.hit);
-        //}
     }
 
     private void BashMove()
     {
-        if (isHit == false)
+        if (Input.GetMouseButton(0))
         {
-            rb.AddForce(-transform.up * 75);
+            Debug.Log("deðdim");
+            downSpeed += 25;
+            downSpeed = Mathf.Clamp(downSpeed, 75, 450);
+            upSpeed += 25;
+            upSpeed = Mathf.Clamp(downSpeed, 25, 150);
         }
 
         else
         {
-            rb.AddForce(transform.up * 25);
+            downSpeed -= 25;
+            downSpeed = Mathf.Clamp(downSpeed, 75, 450);
+            upSpeed -= 25;
+            upSpeed = Mathf.Clamp(downSpeed, 25, 150);
+        }
+
+        if (isHit == false)
+        {
+            rb.AddForce(-transform.up * downSpeed);
+        }
+
+        else
+        {
+            rb.AddForce(transform.up * upSpeed);
         }
     }
 }
